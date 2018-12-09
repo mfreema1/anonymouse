@@ -1,0 +1,28 @@
+{
+  "name": "anonymouse",
+  "version": "1.0.0",
+  "description": "An anonymouse question service for classrooms",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mfreema1/anonymouse.git"
+  },
+  "keywords": [
+    "websockets",
+    "learning",
+    "classroom"
+  ],
+  "author": "Mark Freeman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mfreema1/anonymouse/issues"
+  },
+  "homepage": "https://github.com/mfreema1/anonymouse#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "ws": "^6.1.2"
+  }
+}
