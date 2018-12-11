@@ -1,4 +1,6 @@
 const WebSocket = require('ws')
+const Promise = require('bluebird').Promise
+const redis = Promise.promisifyAll(require('redis'))
 const express = require('express')
 const app = express() //setup routes on top of this
 const ports = {
@@ -9,8 +11,8 @@ const ports = {
 //and an http server on 3000
 
 const wss = new WebSocket.Server({ port: ports.ws, server: app })
+redisClient = redis.createClient()
 
-let clients = new Set()
 const noop = () => {}
 const heartbeat = (ws) => {
     ws.isAlive = true
@@ -18,24 +20,26 @@ const heartbeat = (ws) => {
 
 //wss is the websocket server
 //ws is the websocket client
-wss.on('connection', (ws, req) => {
+wss.on('connection', async (ws, req) => {
     ws.isAlive = true
     const clientIP = req.connection.remoteAddress
-    if(clients.has(clientIP)) {
-        ws.send('Already connected, please stop')
-        ws.close()
-    }
-    else {
-        clients.add(clientIP)
-        ws.send('Hey, welcome!')
-    }
-
-    //if the client disconnects, remove from client pool
-    ws.on('close', () => {
-        clients.delete(clientIP)
-    })
-
-    ws.on('pong', () => { heartbeat(ws) })
+    redisClient.sismemberAsync('clients', clientIP)
+        .then((isMember) => {
+            if(isMember) {
+                ws.send('Already connected, please stop')
+                ws.close()
+            }
+            else {
+                redisClient.saddAsync('clients', clientIP)
+                    .then(() => {
+                        ws.send('Hey welcome!')
+                        ws.on('close', () => { //if the client disconnects, remove from client pool
+                            redisClient.sremAsync('clients', clientIP)
+                        })
+                        ws.on('pong', () => { heartbeat(ws) })
+                    })
+            }
+        })        
 })
 
 //every 5 seconds, ping all clients for broken connections,
