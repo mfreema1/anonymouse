@@ -22,7 +22,9 @@
   },
   "homepage": "https://github.com/mfreema1/anonymouse#readme",
   "dependencies": {
+    "bluebird": "^3.5.3",
     "express": "^4.16.4",
+    "redis": "^2.8.0",
     "ws": "^6.1.2"
   }
 }
