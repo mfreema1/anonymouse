@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "parcel src/client/index.html",
+    "backend": "node src/backend/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -26,6 +27,7 @@
     "bluebird": "^3.5.3",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "mariadb": "^2.0.2-rc",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "redis": "^2.8.0",
