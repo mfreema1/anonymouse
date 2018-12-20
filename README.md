@@ -14,3 +14,14 @@ I also just like experimenting with new things, so I have strictly chosen techno
 - __Parcel__
 
 With that said, these technologies did have some though put into them before being chosen, and I believe they fit the bounds of the problem well.
+
+## How it Works
+This is essentially a dance between three actors -- a professor, a student, and a WebSockets server.  WebSockets is very different from HTTP, so adjusting has been tricky.  
+
+From what I've gathered, WebSockets maintains a persistent channel of communication between the client and server using pings and pongs.  This means once authenticated, you can rest assured that the connection is always the person they say they are -- no need to pass cookies around.
+
+WebSockets does not carry the overhead associated with HTTP, which also unfortunately means there is much less of a defined message format.  You're pretty much free to structure the payload however you want (not that you couldn't with HTTP but you had much more of a framework).  Serialized JSON makes sense for our application.
+
+So, once any actor receives a message, they must determine which form of message it is and respond appropriately.  How you do this is up to you.
+
+Since WebSockets is non-transactional, this means that any user information (or other things like a Redis client) can be associated with the WebSockets connection object itself.  So say a user sends along their login information -- once verified, you can simply dump that data onto the connection object and anytime and event occurs which hands you back the client connection, you will have access to that information.
