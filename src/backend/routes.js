@@ -5,6 +5,9 @@ module.exports = (app) => {
 
     app.get('/professor', (req, res) => {
         //provide form page to create room
+
+        //just serve a dummy file for now to test client side API
+        res.sendFile(`${__dirname}/dummyclient.html`)
     })
 
     app.get('/student', (req, res) => {
