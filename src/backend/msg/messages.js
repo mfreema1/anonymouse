@@ -49,6 +49,12 @@ class LoginResponse extends Message {
     }
 }
 
+class QuestionAcceptance extends Message {
+    constructor(message) {
+        super({ type: constants.QUESTION_ACCEPTANCE, payload: { message }})
+    }
+}
+
 class QuestionConfirmation extends Message {
 
     constructor(message, messageID) {
@@ -58,16 +64,14 @@ class QuestionConfirmation extends Message {
 
 class QuestionForward extends Message {
 
-    constructor(question, messageID) {
-        question.messageID = messageID
-        super({ type: constants.QUESTION_FORWARD, payload: question })
+    constructor(message, messageID) {
+        super({ type: constants.QUESTION_FORWARD, payload: { message, messageID }})
     }
 }
 
-class QuestionResponse extends Message {
-    
-    constructor(messageID, approved) {
-
+class QuestionRejection extends Message {
+    constructor(message, messageID) {
+        super({ type: constants.QUESTION_REJECTION, payload: { message, messageID }})
     }
 }
 
@@ -90,9 +94,10 @@ module.exports = {
     DisconnectResponse,
     ErrorResponse,
     LoginResponse,
+    QuestionAcceptance,
     QuestionConfirmation,
     QuestionForward,
-    QuestionResponse,
+    QuestionRejection,
     RoomGetResponse,
     RoomJoinResponse
 }
