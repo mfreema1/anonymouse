@@ -23,45 +23,19 @@
         "maxLength": 12,
         "minLength": 4
     },
-    "datetime": {
-        "type": "string",
-        "format": "date-time"
-    },
     "approved": {
         "type": "boolean"
     },
-    "question": {
-        "roomID": { "$ref": "#/roomID" },
-        "username": { "$ref": "#/username" },
-        "message": { "$ref": "#/message" },
-        "datetime": { "$ref": "#/datetime" }
-    },
-    "response": {
-        "roomID": { "$ref": "#/roomID" },
-        "username": { "$ref": "#/username" },
-        "message": { "$ref": "#/message" },
-        "datetime": { "$ref": "#/datetime" }
-    },
-    "rejection": {
-        "message": { "$ref": "#/message" },
-        "datetime": { "$ref": "#/datetime" }
-    },
-    "acceptance": {
+    "question proposal": {
         "message": { "$ref": "#/message" }
     },
-    "expiry": {
-        "message": { "$ref": "#/message" },
-        "datetime": { "$ref": "#/datetime" }
-    },
-    "disconnect": {
-        "roomID": { "$ref": "#/roomID" }
+    "question response": {
+        "messageID": { "$ref": "#/messageID" },
+        "approved": { "$ref": "#/approved" }
     },
     "login": {
         "username": { "$ref": "#/username" },
         "password": { "$ref": "#/password" }
-    },
-    "login response": {
-        "approved": { "$ref": "#/approved" }
     },
     "room get": {},
     "room join": {
