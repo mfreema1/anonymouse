@@ -2,8 +2,7 @@ const constants = require('./constants')
 const v = require('jsonschema').validate
 const schemas = require('./schemas')
 
-//this really only needs to be a message and then some response objects.  We
-//don't actually need to model the incoming requests, only the outgoing ones
+//all incoming messages are simply modeled as a message
 class Message {
 
     //payload represents an object
@@ -28,6 +27,7 @@ class Message {
     }
 }
 
+//all outgoing messages are modeled like this for convenience
 class DisconnectResponse extends Message {
 
     constructor(reason) {
@@ -49,9 +49,50 @@ class LoginResponse extends Message {
     }
 }
 
+class QuestionConfirmation extends Message {
+
+    constructor(message, messageID) {
+        super({ type: constants.CONFIRMATION, payload: { message, messageID }})
+    }
+}
+
+class QuestionForward extends Message {
+
+    constructor(question, messageID) {
+        question.messageID = messageID
+        super({ type: constants.QUESTION_FORWARD, payload: question })
+    }
+}
+
+class QuestionResponse extends Message {
+    
+    constructor(messageID, approved) {
+
+    }
+}
+
+class RoomGetResponse extends Message {
+
+    constructor(roomID) {
+        super({ type: constants.ROOM_RESPONSE, payload: { roomID }})
+    }
+}
+
+class RoomJoinResponse extends Message {
+    
+    constructor(approved, roomID) {
+        super({ type: constants.ROOM_JOIN_RESPONSE, payload: { approved, roomID }})
+    }
+}
+
 module.exports = {
     Message,
     DisconnectResponse,
     ErrorResponse,
-    LoginResponse
+    LoginResponse,
+    QuestionConfirmation,
+    QuestionForward,
+    QuestionResponse,
+    RoomGetResponse,
+    RoomJoinResponse
 }

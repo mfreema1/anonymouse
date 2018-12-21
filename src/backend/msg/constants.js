@@ -1,5 +1,6 @@
 module.exports = {
     "QUESTION": "question",
+    "QUESTION_FORWARD": "question forward",
     "RESPONSE": "response",
     "REJECTION": "rejection",
     "ACCEPTANCE": "acceptance",
@@ -8,7 +9,9 @@ module.exports = {
     "CONFIRMATION": "confirmation",
     "ERROR": "error",
     "LOGIN": "login",
-    "LOGIN_RESPONSE": "login response"
+    "LOGIN_RESPONSE": "login response",
+    "ROOM_JOIN": "room join",
+    "ROOM_GET": "room get"
 }
 
 //Proposed message formats and types
@@ -26,7 +29,16 @@ module.exports = {
             datetime: new Date() //these will be strings, after stringification
         }                        //and parse, they are strings
     }
- */
+*/
+
+/**
+    {
+        type: "join room",
+        payload: {
+            roomID: ""
+        }
+    }
+*/
 
 //Once received, cache the message on the server until we get an
 //approval or denial from the professor, max of 30 minutes.  After

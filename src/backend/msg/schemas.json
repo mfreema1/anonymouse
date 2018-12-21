@@ -62,5 +62,9 @@
     },
     "login response": {
         "approved": { "$ref": "#/approved" }
+    },
+    "room get": {},
+    "room join": {
+        "roomID": { "$ref": "#/roomID" }
     }
 }
