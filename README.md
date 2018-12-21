@@ -163,7 +163,7 @@ Question Rejection - If the professor has opted to reject the question, then the
     type: "question rejection",
     payload: {
         message: "Hey there, professor!",
-        messageID: "1d3e1639-d1fc-40d6-a9cb-b04133e59d94
+        messageID: "1d3e1639-d1fc-40d6-a9cb-b04133e59d94"
     }
 }
 ```
